@@ -1,0 +1,19 @@
+<main class="page">
+  <section class="hero">
+    <p class="eyebrow">Angular Conf 2026</p>
+    <h1>Palestrantes ao vivo via HttpClient</h1>
+    <p class="lead">
+      A lista abaixo é carregada do backend oficial do evento em tempo de execução.
+    </p>
+  </section>
+
+  @if (palestrantes.length === 0) {
+    <p class="empty-state">Carregando palestrantes...</p>
+  } @else {
+    <section class="grid">
+      @for (palestrante of palestrantes; track palestrante.id) {
+        <app-palestrante-card [palestrante]="palestrante" />
+      }
+    </section>
+  }
+</main>

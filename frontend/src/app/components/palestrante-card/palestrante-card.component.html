@@ -1,0 +1,30 @@
+<article class="card">
+  <div class="card-header">
+    <img [src]="palestrante.foto" [alt]="palestrante.nome" />
+    <div>
+      <h2>{{ palestrante.nome }}</h2>
+      <p>{{ palestrante.cargo }} · {{ palestrante.empresa }}</p>
+    </div>
+  </div>
+
+  <p class="bio">{{ palestrante.bio }}</p>
+
+  <dl>
+    <div>
+      <dt>Tema</dt>
+      <dd>{{ palestrante.temaPalestra }}</dd>
+    </div>
+    <div>
+      <dt>Trilha</dt>
+      <dd>{{ palestrante.trilha }}</dd>
+    </div>
+    <div>
+      <dt>Nível</dt>
+      <dd>{{ palestrante.nivel }}</dd>
+    </div>
+    <div>
+      <dt>Dia / Horário</dt>
+      <dd>Dia {{ palestrante.dia }} - {{ palestrante.horario }}</dd>
+    </div>
+  </dl>
+</article>
