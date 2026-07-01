@@ -5,15 +5,24 @@
     <p class="lead">
       A lista abaixo é carregada do backend oficial do evento em tempo de execução.
     </p>
+    <label class="search-bar">
+      <span>Pesquisar por nome</span>
+      <input
+        type="search"
+        placeholder="Digite o nome do palestrante"
+        [value]="termoBusca()"
+        (input)="atualizarTermoBusca($event)"
+      />
+    </label>
   </section>
 
-  @if (carregando) {
+  @if (carregando()) {
     <p class="empty-state">Carregando palestrantes...</p>
-  } @else if (palestrantes.length === 0) {
+  } @else if (palestrantes().length === 0) {
     <p class="empty-state">Nenhum palestrante disponível no momento.</p>
   } @else {
     <section class="grid">
-      @for (palestrante of palestrantes; track palestrante.id) {
+      @for (palestrante of palestrantes(); track palestrante.id) {
         <app-palestrante-card [palestrante]="palestrante" />
       }
     </section>
