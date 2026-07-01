@@ -7,8 +7,10 @@
     </p>
   </section>
 
-  @if (palestrantes.length === 0) {
+  @if (carregando) {
     <p class="empty-state">Carregando palestrantes...</p>
+  } @else if (palestrantes.length === 0) {
+    <p class="empty-state">Nenhum palestrante disponível no momento.</p>
   } @else {
     <section class="grid">
       @for (palestrante of palestrantes; track palestrante.id) {

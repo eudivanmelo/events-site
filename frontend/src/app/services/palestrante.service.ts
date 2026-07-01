@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 import { Palestrante } from '../models/palestrante.model';
 
@@ -12,6 +12,19 @@ export class PalestranteService {
   private readonly apiUrl = 'http://localhost:3001/api/palestrantes';
 
   buscarPalestrantes(): Observable<Palestrante[]> {
-    return this.http.get<Palestrante[]>(this.apiUrl);
+    return this.http.get<Palestrante[]>(this.apiUrl).pipe(
+      tap((palestrantes) => {
+        console.log(`API retornou ${palestrantes.length} palestrante(s).`);
+      }),
+      map((palestrantes) =>
+        palestrantes.filter(
+          (palestrante) => palestrante.empresa === 'Globo' || palestrante.nivel === 'Avançado'
+        )
+      ),
+      catchError((erro) => {
+        console.error('Falha ao buscar palestrantes. Retornando lista vazia.', erro);
+        return of([] as Palestrante[]);
+      })
+    );
   }
 }
